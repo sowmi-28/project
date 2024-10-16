@@ -1,0 +1,20 @@
+---
+- name: install nginx
+  become: yes
+  hosts: AL                                                                                                                                                                                                                                                                     
+  tasks:  
+    - name: yum module update
+      dnf:
+        upgrade: yes
+        update_cache: yes
+    - name: install nginx                                                                                                                          
+      dnf: 
+        name=httpd state=latest                                                                                                                 
+    - name: start the nginx service                                                                                                                    
+      service:                                                                                                                                    
+        name: httpd                                                                                                                                
+        state: started
+    - name: Upgrade all packages on the system
+      ansible.legacy.dnf:
+        name: "*"
+        state: latest
